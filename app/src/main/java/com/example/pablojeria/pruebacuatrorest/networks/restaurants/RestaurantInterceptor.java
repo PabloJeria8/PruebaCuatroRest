@@ -18,7 +18,7 @@ public class RestaurantInterceptor {
 
     public static final String BASE_URL = "https://developers.zomato.com/api/v2.1/";
 
-    public Restaurants get()
+    public GetRestaurants get()
     {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
                 .connectTimeout(60, TimeUnit.SECONDS)
@@ -56,7 +56,7 @@ public class RestaurantInterceptor {
                 .client(client)
                 .build();
 
-        Restaurants request = interceptor.create(Restaurants.class);
+        GetRestaurants request = interceptor.create(GetRestaurants.class);
 
         return request;
 

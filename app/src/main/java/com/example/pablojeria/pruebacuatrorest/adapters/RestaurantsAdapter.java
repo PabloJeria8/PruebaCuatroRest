@@ -3,6 +3,7 @@ package com.example.pablojeria.pruebacuatrorest.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.example.pablojeria.pruebacuatrorest.data.RestaurantQueries;
 import com.example.pablojeria.pruebacuatrorest.models.Restaurant;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,7 +24,8 @@ import java.util.List;
 
 public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.ViewHolder> {
 
-    private List<Restaurant> restaurants = new RestaurantQueries().all();
+    // private List<Restaurant> restaurantslist = new RestaurantQueries().all();
+    private List<Restaurant> restaurantslist = new ArrayList<>();
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -32,27 +35,20 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Restaurant restaurant = restaurants.get(position);
-        final Context context = holder.itemView.getContext();
-        Picasso.with(holder.itemView.getContext()).load(restaurant.getImage_url()).centerCrop().fit().into(holder.photo);
-        holder.titletextView.setText(restaurant.getTitle());
-        holder.descriptiontextView.setText(restaurant.getDescription());
+        Restaurant restaurant = restaurantslist.get(position);
+        //final Context context = holder.itemView.getContext();
+        Picasso.with(holder.itemView.getContext()).load(restaurant.getCollections([get]).getImage_url()).centerCrop().fit().into(holder.photo);
+        //holder.titletextView.setText(restaurant.getTitle());
+        //holder.descriptiontextView.setText(restaurant.getDescription());
 
-        holder.twitter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String url = restaurants.get(holder.getAdapterPosition()).getTwitter();
-                webIntent(url, context);
-            }
-        });
+//        holder.twitter.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String url = restaurantslist.get(holder.getAdapterPosition()).getTwitter();
+//                webIntent(url, context);
+//            }
+//        });
 
-        holder.github.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String url = restaurants.get(holder.getAdapterPosition()).getGithub();
-                webIntent(url, context);
-            }
-        });
 
     }
 
@@ -64,20 +60,21 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         }
     }
 
-    public void update() {
-        restaurants.clear();
-        restaurants.addAll(new RestaurantQueries().all());
+    public void update(List<Restaurant> restaurants) {
+        restaurantslist.addAll(restaurants);
+        //restaurants.clear();
+        //restaurants.addAll(new RestaurantQueries().all());
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return restaurants.size();
+        return restaurantslist.size();
     }
 
     public void find(String name) {
-        restaurants.clear();
-        restaurants.addAll(new RestaurantQueries().findByName(name));
+        restaurantslist.clear();
+        restaurantslist.addAll(new RestaurantQueries().findByName(name));
         notifyDataSetChanged();
     }
 
@@ -90,8 +87,8 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         public ViewHolder(View itemView) {
             super(itemView);
             photo = (ImageView) itemView.findViewById(R.id.restaurantIv);
-            titletextView = (TextView) itemView.findViewById(R.id.titleTv);
-            descriptiontextView = (TextView) itemView.findViewById(R.id.descriptionTv);
+//            titletextView = (TextView) itemView.findViewById(R.id.titleTv);
+//            descriptiontextView = (TextView) itemView.findViewById(R.id.descriptionTv);
         }
 
     }

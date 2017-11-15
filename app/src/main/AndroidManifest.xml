@@ -23,10 +23,10 @@
             android:value="com.example.pablojeria.pruebacuatrorest.models" />
 
         <activity
-            android:name=".views.FullscreenActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:name=".views.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenLayout"
             android:label="@string/app_name"
-            android:theme="@style/FullscreenTheme">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,11 +34,11 @@
             </intent-filter>
         </activity>
 
-        <service
+        <!--<service
             android:name=".background.RecentRestaurantService"
-            android:exported="false" />
-
-        <activity android:name=".views.MainActivity"></activity>
+            android:exported="false" />-->
+<!--
+        <activity android:name=".views.MainActivity"></activity>-->
     </application>
 
 </manifest>
